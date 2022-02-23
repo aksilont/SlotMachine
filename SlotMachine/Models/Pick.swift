@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Pick: Identifiable {
+struct Pick: Identifiable, Equatable {
     let id = UUID()
     let value: String
+    
+    static func == (lhs: Pick, rhs: Pick) -> Bool {
+        lhs.value == rhs.value
+    }
 }
