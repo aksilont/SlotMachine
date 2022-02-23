@@ -35,22 +35,30 @@ struct MainView: View {
                     Rectangle()
                         .frame(width: geometry.size.width * 5/6, height: 1)
                         .position(x: midWidht, y: midHeight)
+                        .opacity(0.3)
                 }
-                VStack {
-                    showLine(line: gameViewModel.combination.firstLine)
-                    showLine(line: gameViewModel.combination.currentLine)
-                    showLine(line: gameViewModel.combination.nextLine)
+                
+                HStack {
+                    showLine(line: gameViewModel.leftLine)
+                    showLine(line: gameViewModel.middleLine)
+                    showLine(line: gameViewModel.rightLine)
+                }
+                
+                if gameViewModel.winer {
+                    Text("W  I  N")
+                    .background(Color.white)
+                    .opacity(0.7)
+                    .foregroundColor(.green)
+                    .font(.system(size: 80))
                 }
             }
         }
     }
     
     func showLine(line: [Pick]) -> some View {
-        return HStack {
+        return VStack {
             ForEach(line) { item in
-                Text(item.value)
-                    .font(.largeTitle)
-                    .padding()
+                Text(item.value).font(.largeTitle).padding()
             }
         }
     }
